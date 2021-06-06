@@ -29,7 +29,7 @@ addForm.addEventListener("submit", (e) => {
   //   This is making sure a user cannot submit "nothing". There must be some length.
   //   .reset clears the form
   const todo = addForm.add.value.trim();
-  if (todo.length) {
+  if (todo.length>0) {
     generateTemplate(todo);
     addForm.reset();
   }
@@ -45,11 +45,11 @@ list.addEventListener("click", (e) => {
 
 const filterTodos = (term) => {
   Array.from(list.children)
-    .filter((todo) => !todo.textContent.includes(term))
+    .filter((todo) => !todo.textContent.toLocaleLowerCase().includes(term.toLocaleLowerCase()))
     .forEach((todo) => todo.classList.add("filtered"));
 
   Array.from(list.children)
-    .filter((todo) => todo.textContent.includes(term))
+    .filter((todo) => todo.textContent.toLocaleLowerCase().includes(term.toLocaleLowerCase()))
     .forEach((todo) => todo.classList.remove("filtered"));
 };
 
